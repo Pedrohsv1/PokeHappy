@@ -22,13 +22,18 @@ export const ImagePokemon = ({ sprites }: PropsImagePokemon) => {
   useEffect(() => {}, [img]);
   return (
     <div className="space-y-4">
-      <Image
-        className="p-16 w-[288px] h-[288px] bg-neutral-900 rounded-lg"
-        src={img}
-        alt={""}
-        width={288}
-        height={288}
-      />
+      <div className="w-[288px] h-[288px] p-4 flex bg-neutral-900 rounded-lg justify-center items-center">
+        <Image
+          className=" bg-neutral-900 max-w-[288px] max-h-[288px] rounded-lg"
+          src={img}
+          alt={""}
+          width={0}
+          height={0}
+          sizes="120px"
+          style={{ width: "50%", height: "auto" }} // optional
+        />
+      </div>
+
       <Carousel
         className="w-[190px] ml-12"
         opts={{

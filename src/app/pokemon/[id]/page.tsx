@@ -19,6 +19,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { TypesBadge } from "@/components/types-pokemon";
 import {
@@ -34,6 +35,8 @@ import { MoveCard } from "@/components/move-card";
 import { EvolutionSolo } from "@/components/evolutions";
 import { BreadCrumbComp, BreadProps } from "@/components/breadcrum";
 import { CardStat } from "@/components/card-stat";
+import { GetSpecie } from "@/app/api/services/get-specie/get-specie";
+import { Specie } from "@/app/api/services/get-specie/get-specie.interface";
 
 export default function PokemonPage() {
   const breads: BreadProps = {
@@ -50,9 +53,14 @@ export default function PokemonPage() {
   const router = useParams();
 
   const [pokemon, setPokemon] = useState<Pokemon>();
+  const [specie, setSpecie] = useState<Specie>();
+
   const mutatePokemon = useMutation(GetPokemon, {
     onSettled: (data) => {
       setPokemon(data);
+      mutateSpecie.mutate({
+        url: `pokemon-species/${data?.species.url.split("/")[6]}/`,
+      });
     },
     onError: () => {
       toast({
@@ -60,6 +68,12 @@ export default function PokemonPage() {
         description: "😥 Lembre-se, o número máximo de pokemons é 1025",
       });
       redirect("/");
+    },
+  });
+
+  const mutateSpecie = useMutation(GetSpecie, {
+    onSettled: (data) => {
+      setSpecie(data);
     },
   });
 
@@ -134,6 +148,20 @@ export default function PokemonPage() {
           )}
 
           <div className="h-full flex flex-col gap-4">
+            {specie && (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Specie</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {
+                    specie.flavor_text_entries.filter(
+                      (entrie) => entrie.language.name == "en"
+                    )[0].flavor_text
+                  }
+                </CardContent>
+              </Card>
+            )}
             {pokemon ? (
               <CardStat stats={pokemon.stats} />
             ) : (
@@ -146,7 +174,13 @@ export default function PokemonPage() {
                 </div>
               </Card>
             )}
-            {pokemon && <EvolutionSolo url={`evolution-chain/${pokemon.id}`} />}
+            {specie?.evolution_chain && (
+              <EvolutionSolo
+                url={`evolution-chain/${
+                  specie.evolution_chain.url.split("/")[6]
+                }`}
+              />
+            )}
 
             {pokemon && <AbilityCard abilities={pokemon.abilities} />}
             {pokemon && <MoveCard moves={pokemon.moves} />}
