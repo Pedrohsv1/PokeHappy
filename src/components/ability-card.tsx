@@ -15,9 +15,9 @@ interface PropsAbility {
 
 export const AbilityCard = ({ abilities }: PropsAbility) => {
   return (
-    <Card className="p-4 h-full">
+    <Card className=" h-full">
       <CardHeader>
-        <TypographyH2>Abilities</TypographyH2>
+        <CardTitle>Abilities</CardTitle>
         <CardDescription>Abilities that this pokemon have.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">

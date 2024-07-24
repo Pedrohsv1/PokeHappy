@@ -22,14 +22,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TypesBadge } from "@/components/types-pokemon";
-import {
-  HeartCrack,
-  Shield,
-  ShieldHalf,
-  Sword,
-  Swords,
-  Wind,
-} from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { MoveCard } from "@/components/move-card";
 import { EvolutionSolo } from "@/components/evolutions";
@@ -37,6 +29,7 @@ import { BreadCrumbComp, BreadProps } from "@/components/breadcrum";
 import { CardStat } from "@/components/card-stat";
 import { GetSpecie } from "@/app/api/services/get-specie/get-specie";
 import { Specie } from "@/app/api/services/get-specie/get-specie.interface";
+import { CarouselCardsSoloPokemon } from "@/components/carrosel-cards-solo-pokemon";
 
 export default function PokemonPage() {
   const breads: BreadProps = {
@@ -182,6 +175,7 @@ export default function PokemonPage() {
               />
             )}
 
+            {pokemon && <CarouselCardsSoloPokemon name={pokemon.name} />}
             {pokemon && <AbilityCard abilities={pokemon.abilities} />}
             {pokemon && <MoveCard moves={pokemon.moves} />}
           </div>

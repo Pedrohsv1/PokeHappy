@@ -23,8 +23,8 @@ export const CardStat = ({ stats }: CardStatsProps) => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-3 gap-4">
-          {stats.map((stat) => (
-            <div className="flex flex-col gap-2">
+          {stats.map((stat, i) => (
+            <div key={i} className="flex flex-col gap-2">
               <div className="flex gap-2">
                 {stat.stat.name === "hp" ? (
                   <HeartCrack className="size-6" />

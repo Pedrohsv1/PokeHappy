@@ -46,12 +46,11 @@ export const EvolutionSolo = ({ url }: PropsEvolution) => {
               )}
             </div>
           )}
-
           {evolutions?.chain?.evolves_to.map((evolution, index) => (
             <React.Fragment key={index}>
               <div className="flex flex-col space-y-2">
-                {evolution.evolution_details.map((details) => (
-                  <div className="flex flex-col gap-1">
+                {evolution.evolution_details.map((details, i) => (
+                  <div key={i} className="flex flex-col gap-1">
                     {details.min_level ? (
                       <React.Fragment>
                         <p className="text-base ">Level evolution</p>
@@ -100,10 +99,10 @@ export const EvolutionSolo = ({ url }: PropsEvolution) => {
                 )}
               </div>
 
-              {evolution.evolves_to.map((evolve) => (
-                <div className="flex flex-col space-y-2">
-                  {evolve.evolution_details.map((details) => (
-                    <div className="flex flex-col gap-1">
+              {evolution.evolves_to.map((evolve, i) => (
+                <div key={i} className="flex flex-col space-y-2">
+                  {evolve.evolution_details.map((details, j) => (
+                    <div key={j} className="flex flex-col gap-1">
                       {details.min_level ? (
                         <React.Fragment>
                           <p className="text-base ">Level evolution</p>

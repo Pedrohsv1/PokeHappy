@@ -7,6 +7,12 @@ module.exports = {
         port: "",
         pathname: "/PokeAPI/sprites/master/sprites/pokemon/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.pokemontcg.io",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
